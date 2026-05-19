@@ -238,6 +238,27 @@ kbd {
   line-height: 1.35;
 }
 
+.support {
+  margin-top: 14px;
+}
+
+.support .button {
+  display: grid;
+  place-items: center;
+  min-height: 48px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f0c84f;
+  color: #171307;
+  font-weight: 900;
+  text-align: center;
+  text-decoration: none;
+}
+
+.support .button:hover {
+  filter: brightness(1.06);
+}
+
 @media (max-width: 900px) {
   body {
     padding: 10px;
