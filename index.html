@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lumen Grove</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="game-card" aria-label="Lumen Grove">
+        <div class="hud">
+          <div><span>Nivel</span><strong id="wave">1</strong></div>
+          <div><span>Lumină</span><strong id="light">0/6</strong></div>
+          <div><span>Viață</span><strong id="health">3</strong></div>
+          <div><span>Scor</span><strong id="score">0</strong></div>
+        </div>
+        <canvas id="game" width="960" height="640"></canvas>
+        <div class="message" id="message"></div>
+        <div class="upgrade" id="upgrade" hidden>
+          <h2>Alege o creștere</h2>
+          <div class="upgrade-grid">
+            <button type="button" data-upgrade="speed">Mai rapid</button>
+            <button type="button" data-upgrade="dash">Dash mai des</button>
+            <button type="button" data-upgrade="carry">Mai multă lumină</button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="side">
+        <h1>Lumen Grove</h1>
+        <p>
+          Un arena 2D relaxat, dar cu tensiune: culegi lumini, le duci la copacul
+          central, folosești dash-ul ca să scapi și alegi upgrade-uri după fiecare nivel.
+        </p>
+        <div class="controls">
+          <div><kbd>WASD</kbd><span>sau săgeți pentru mișcare</span></div>
+          <div><kbd>Space</kbd><span>dash scurt prin pericol</span></div>
+          <div><kbd>R</kbd><span>restart după game over</span></div>
+        </div>
+        <section class="best-score" aria-label="Cel mai bun scor">
+          <span>Cel mai bun scor</span>
+          <strong id="best-score">0</strong>
+          <p id="best-score-note">Se actualizează doar când bați recordul tău.</p>
+        </section>
+      </aside>
+    </main>
+
+    <script src="game.js"></script>
+  </body>
+</html>
