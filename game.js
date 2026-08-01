@@ -357,7 +357,9 @@ function drawGameOver() {
   ctx.fillText("Apasa R ca sa reincerci", game.w / 2, game.h / 2 + 24);
 }
 
-function metrics() {
+let canvasMetrics;
+
+function resizeCanvas() {
   const rect = canvas.getBoundingClientRect();
   const scale = window.devicePixelRatio || 1;
   const width = Math.round(rect.width * scale);
@@ -367,19 +369,28 @@ function metrics() {
     canvas.height = height;
   }
   ctx.setTransform(scale, 0, 0, scale, 0, 0);
-  return { w: rect.width, h: rect.height };
+  canvasMetrics = { w: rect.width, h: rect.height };
+}
+
+function metrics() {
+  return canvasMetrics;
 }
 
 function getTree() {
   return { x: game.w / 2, y: game.h / 2 + 16, r: 36 };
 }
 
+function setText(element, value) {
+  const text = String(value);
+  if (element.textContent !== text) element.textContent = text;
+}
+
 function syncHud() {
-  ui.wave.textContent = game.wave;
-  ui.light.textContent = `${Math.min(game.deposited, game.targetLight)}/${game.targetLight}`;
-  ui.health.textContent = game.player.health;
-  ui.score.textContent = game.score;
-  ui.bestScore.textContent = bestScore;
+  setText(ui.wave, game.wave);
+  setText(ui.light, `${Math.min(game.deposited, game.targetLight)}/${game.targetLight}`);
+  setText(ui.health, game.player.health);
+  setText(ui.score, game.score);
+  setText(ui.bestScore, bestScore);
 }
 
 function showMessage(text) {
@@ -428,10 +439,13 @@ window.addEventListener("keyup", (event) => {
   keys.delete(event.key.toLowerCase());
 });
 
+window.addEventListener("resize", resizeCanvas);
+
 ui.upgradeButtons.forEach((button) => {
   button.addEventListener("click", () => applyUpgrade(button.dataset.upgrade));
 });
 
 ui.bestScore.textContent = bestScore;
+resizeCanvas();
 resetGame();
 requestAnimationFrame(loop);
